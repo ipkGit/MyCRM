@@ -31,7 +31,6 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     @Transactional
     public CustomerOrder getCustomerOrder(int id) {
         return customerOrderDAO.getCustomerOrder(id);
-
     }
 
     @Override

@@ -6,12 +6,6 @@ import java.util.List;
 
 public interface CustomerOrderDAO {
 
-
-
-    /*
-    передает список всех заказов из БД
-    transmits list of all orders from BD
-     */
     List<CustomerOrder> getCustomerOrderList(int stage);
 
     void saveOrUpdateOrder(CustomerOrder customerOrder);

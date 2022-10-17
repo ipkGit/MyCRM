@@ -23,7 +23,6 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     @Transactional
     public void saveOrUpdateManager(Manager manager) {
-
         managerDAO.saveOrUpdateManager(manager);
     }
 

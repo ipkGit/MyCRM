@@ -14,20 +14,17 @@ public class ManagerDAOImpl implements ManagerDAO {
 
     @Autowired //Create bean sessionFactory from applicationContext
     private SessionFactory sessionFactory;
+
     @Override
     public List<Manager> getAllManagerList() {
         Session session = sessionFactory.getCurrentSession();
-
         List<Manager> managerList = session.createQuery("from Manager ", Manager.class).getResultList();
-
         return managerList;
     }
 
     @Override
     public void saveOrUpdateManager(Manager manager) {
-
         Session session = sessionFactory.getCurrentSession();
-
         session.saveOrUpdate(manager);
     }
 

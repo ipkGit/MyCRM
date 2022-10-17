@@ -24,7 +24,7 @@ public class MyController {
     @Autowired
     ManagerService managerService;
 
-    @RequestMapping("/")
+    @RequestMapping("/")//main page with list of orders different status (status 1- new, 2 - on work, 3 - completed )
     public String homePage(Model model) {
         List<CustomerOrder> customerOrderListStage1 = customerOrderService.getCustomerOrderList(1);
         List<CustomerOrder> customerOrderListStage2 = customerOrderService.getCustomerOrderList(2);
@@ -37,8 +37,7 @@ public class MyController {
         return "index";
     }
 
-    //Создать новый заказ
-    @RequestMapping("/new_order")
+    @RequestMapping("/new_order") // page for create new order
     public String newUpdateOrderPage (Model model) {
 
         CustomerOrder customerOrder = new CustomerOrder();
@@ -48,7 +47,7 @@ public class MyController {
         return "order_detail";
     }
 
-    @RequestMapping("/save_order")
+    @RequestMapping("/save_order")// save order details and redirect to main page
     public String saveCustomerOrder (@ModelAttribute("newCustomerOrder") CustomerOrder customerOrder) {
 
         customerOrderService.saveOrUpdateOrder(customerOrder);
@@ -56,8 +55,7 @@ public class MyController {
         return "redirect:/";
     }
 
-
-    @RequestMapping("/edit_order")
+    @RequestMapping("/edit_order") // page for change order details
     public String editCustomerOrder (@RequestParam ("orderID") int id, Model model) {
 
         CustomerOrder customerOrder = customerOrderService.getCustomerOrder(id);
@@ -67,8 +65,7 @@ public class MyController {
         return "order_detail";
     }
 
-
-    @RequestMapping("/managers")
+    @RequestMapping("/managers") // show list of managers
     public String allManagers (Model model) {
         List<Manager> managerList = managerService.getAllManagerList();
         model.addAttribute("managers", managerList);
@@ -76,7 +73,7 @@ public class MyController {
         return "managers";
     }
 
-    @RequestMapping("/managers/manager_detail")
+    @RequestMapping("/managers/manager_detail") // page for create manager
     public String newUpdateManager (Model model) {
 
         Manager manager = new Manager();
@@ -86,8 +83,7 @@ public class MyController {
         return "manager_detail";
     }
 
-
-    @RequestMapping("/managers/save_manager")
+    @RequestMapping("/managers/save_manager") //save manager details and redirect to manager page
     public String saveManager (@ModelAttribute("newManager") Manager manager) {
 
         managerService.saveOrUpdateManager(manager);
@@ -95,7 +91,7 @@ public class MyController {
         return "redirect:/managers";
     }
 
-    @RequestMapping("/updateStage")
+    @RequestMapping("/updateStage") // option update stage on main page
     public String updateStageOrder (@RequestParam ("orderID") int id, @RequestParam("stage") int stage, Model model) {
 
         System.out.println("id: "+ id + " : stage" + stage);
@@ -103,10 +99,6 @@ public class MyController {
 
         System.out.println(customerOrder.getAddress());
         customerOrderService.setStageOrder(customerOrder, stage);
-
-
-
-
 
         return "redirect:/";
     }

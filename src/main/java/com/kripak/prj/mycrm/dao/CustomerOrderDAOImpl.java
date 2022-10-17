@@ -14,48 +14,28 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
     @Autowired //Create bean sessionFactory from applicationContext
     private SessionFactory sessionFactory;
 
-    /*
-    передает список всех заказов из БД
-    transmits list of all orders from BD
-     */
-    @Override
+    @Override //transmits list of orders from BD by stage
     public List<CustomerOrder> getCustomerOrderList(int stage) {
         Session session = sessionFactory.getCurrentSession();
-
         List<CustomerOrder> customerOrderList = session.createQuery("from CustomerOrder where stage =" + stage, CustomerOrder.class)
                 .getResultList();
-
         return customerOrderList;
     }
 
-
-    /*
-    Сохранить или обновить заказ в БД
-    Save or Update order in BD
-     */
-    @Override
+    @Override //Save or Update order in BD
     public void saveOrUpdateOrder(CustomerOrder customerOrder) {
-
         Session session = sessionFactory.getCurrentSession();
-
         session.saveOrUpdate(customerOrder);
     }
 
-    /*
-    получить данные заказа по id
-    Get orders details by id
-     */
-    @Override
+    @Override //Get orders details by id
     public CustomerOrder getCustomerOrder(int id) {
         Session session = sessionFactory.getCurrentSession();
-
         CustomerOrder customerOrder = session.get(CustomerOrder.class, id);
-
         return customerOrder;
-
     }
 
-    @Override
+    @Override // set order stage
     public void setStageOrder(CustomerOrder customerOrder, int stage) {
         Session session = sessionFactory.getCurrentSession();
         stage = stage + customerOrder.getStage();
